@@ -34,14 +34,11 @@ var TRANSITIONS = [
 
   // Condicional
   new Transition('?', 0, 8),
-
-
-
 ];
 
 var TOKENS = [
-  new Token('+', 1),
-  new Token('-', 2),
+  new Token('+', 1, "Operador Aritmético"),
+  new Token('-', 2 ),
   new Token('*', 3),
   new Token('/', 4),
   new Token('for', 7),
@@ -100,7 +97,7 @@ window.LexicalAnalyzer = {
     Logger.transitionTo(nextState);
   },
 
-  run: function(input, state){
+  run: function(input){
     this.state = 0; // Estado atual
     this.position = 0; // Posicao na linha
     this.line = 0; // Linha
@@ -124,13 +121,12 @@ window.LexicalAnalyzer = {
           var token = this.getToken(this.state);
 
           if (token) {
-            RESULTS.push(new Result(line, token.value, currentState));
+            this.createTokenResult(line, token, currentState);
             this.transitionTo(0);
-            Logger.tokenIdentified(token);
+
           } else {
             word = input[line].slice(this.position, i);
-            RESULTS.push(new Result(line, word, 99));
-            Logger.unknownWord(word);
+            this.createErrorResult(line, word);
           }
 
           // Atualiza a posição atual da linha
@@ -144,8 +140,16 @@ window.LexicalAnalyzer = {
         }
       }
     }
+  },
 
+  createTokenResult: function(line, token, currentState){
+    RESULTS.push(new Result(line, token.value, currentState));
+    Logger.tokenIdentified(token);
+  },
 
+  createErrorResult: function(line, word){
+    RESULTS.push(new Result(line, word, 99));
+    Logger.unknownWord(word);
   },
 
   buildResults: function(){
