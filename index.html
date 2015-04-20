@@ -5,14 +5,19 @@
   <title></title>
 </head>
 <body>
-
+<textarea name="input" id="input" cols="30" rows="10"></textarea>
+<button type="button" id="build" onclick="build()">Build</button>
 
 
 <script src="transitionTable.js"></script>
 <script>
 
-  window.LexicalAnalyzer.run('for for fo 5 + 5', 0);
-  window.LexicalAnalyzer.buildResults();
+  function build(){
+    var input = document.getElementById('input').value;
+
+    window.LexicalAnalyzer.run(input, 0);
+    window.LexicalAnalyzer.buildResults();
+  }
 </script>
 </body>
 

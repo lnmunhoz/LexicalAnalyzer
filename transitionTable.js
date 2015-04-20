@@ -35,6 +35,8 @@ var TRANSITIONS = [
   // Condicional
   new Transition('?', 0, 8),
 
+
+
 ];
 
 var TOKENS = [
@@ -52,7 +54,9 @@ var RESULT_MESSAGES = [
   new ResultMessage(3, 'Operador Aritmético'),
   new ResultMessage(4, 'Operador Aritmético'),
   new ResultMessage(7, 'Loop'),
+  new ResultMessage(8, 'Condicional'),
   new ResultMessage(99, 'Palavra Desconhecida'),
+
 ];
 
 var RESULTS = [];
@@ -96,44 +100,52 @@ window.LexicalAnalyzer = {
     Logger.transitionTo(nextState);
   },
 
-  nextLine: function(){
-    this.line += 1;
-  },
-
   run: function(input, state){
-    this.state = 0;
-    this.position = 0;
-    this.line = 0;
+    this.state = 0; // Estado atual
+    this.position = 0; // Posicao na linha
+    this.line = 0; // Linha
 
-    input = input + ' ';
-    for (var i = 0; i < input.length; i++) {
-      var char = input[i];
-      var currentState = this.state;
+    // Array de linhas
+    input = input.split('\n');
 
-      switch(char){
+    for (var line = 0; line < input.length; line++) {
+      this.position = 0;
 
-        case ' ':
-        var token = this.getToken(this.state);
+      // Adiciona um espaço no final da linha para habilitar a leitura
+      input[line] = input[line].trim() + ' ';
 
-        if (token) {
-          RESULTS.push(new Result(this.line, token.value, currentState));
-          this.transitionTo(0);
-          Logger.tokenIdentified(token);
-        } else {
-          word = input.slice(this.position, i);
-          RESULTS.push(new Result(this.line, word, 99));
-          Logger.unknownWord(word);
+      // Automato
+      for (var i = 0; i < input[line].length; i++) {
+        var char = input[line][i];
+        var currentState = this.state;
+
+        switch(char){
+          case ' ':
+          var token = this.getToken(this.state);
+
+          if (token) {
+            RESULTS.push(new Result(line, token.value, currentState));
+            this.transitionTo(0);
+            Logger.tokenIdentified(token);
+          } else {
+            word = input[line].slice(this.position, i);
+            RESULTS.push(new Result(line, word, 99));
+            Logger.unknownWord(word);
+          }
+
+          // Atualiza a posição atual da linha
+          this.position = i + 1;
+          break;
+
+          default:
+          var nextState = this.getNextState(char, currentState);
+          this.transitionTo(nextState);
+          break;
         }
-
-        this.position = i + 1;
-        break;
-
-        default:
-        var nextState = this.getNextState(char, currentState);
-        this.transitionTo(nextState);
-        break;
       }
     }
+
+
   },
 
   buildResults: function(){
@@ -151,6 +163,8 @@ window.LexicalAnalyzer = {
       }
       rows.push(row);
     }
+
+    RESULTS = [];
     console.table(rows);
   }
 
