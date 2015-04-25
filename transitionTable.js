@@ -37,8 +37,8 @@ var TRANSITIONS = [
 ];
 
 var TOKENS = [
-  new Token('+', 1, "Operador Aritmético"),
-  new Token('-', 2 ),
+  new Token('+', 1),
+  new Token('-', 2),
   new Token('*', 3),
   new Token('/', 4),
   new Token('for', 7),
@@ -118,25 +118,25 @@ window.LexicalAnalyzer = {
 
         switch(char){
           case ' ':
-          var token = this.getToken(this.state);
+            var token = this.getToken(this.state);
 
-          if (token) {
-            this.createTokenResult(line, token, currentState);
-            this.transitionTo(0);
+            if (token) {
+              this.createTokenResult(line, token, currentState);
+              this.transitionTo(0);
 
-          } else {
-            word = input[line].slice(this.position, i);
-            this.createErrorResult(line, word);
-          }
+            } else {
+              var word = input[line].slice(this.position, i);
+              this.createErrorResult(line, word);
+            }
 
-          // Atualiza a posição atual da linha
-          this.position = i + 1;
-          break;
+            // Atualiza a posição atual da linha
+            this.position = i + 1;
+            break;
 
           default:
-          var nextState = this.getNextState(char, currentState);
-          this.transitionTo(nextState);
-          break;
+            var nextState = this.getNextState(char, currentState);
+            this.transitionTo(nextState);
+            break;
         }
       }
     }
