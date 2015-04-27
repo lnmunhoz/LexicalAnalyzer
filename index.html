@@ -2,25 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Analisador Lexico</title>
+  <style>
+  textarea, button{
+    font-size:16px;
+    font-family: 'Consolas';
+  }
+  </style>
 </head>
 <body>
-<form>
-<textarea name="input" id="input" cols="30" rows="10"></textarea>
-<button type="button" id="build" onclick="build()">Build</button>
-<button type="reset"> Limpar </button>
-</form>
+  <form action="#">
+    <textarea name="input" id="input" cols="30" rows="10"></textarea>
+    <button type="button" onclick="build()">Build</button>
+    <button type="reset" value="reset">Reset</button>
+  </form>
 
-<script src="transitionTable.js"></script>
-<script>
-
+  <script src="transitionTable.js"></script>
+  <script>
   function build(){
     var input = document.getElementById('input').value;
 
     window.LexicalAnalyzer.run(input);
     window.LexicalAnalyzer.buildResults();
   }
-</script>
+
+
+  </script>
 </body>
 
 </html>
