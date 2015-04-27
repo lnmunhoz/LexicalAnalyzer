@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <title>Analisador Lexico</title>
   <style>
-  textarea, button{
+  textarea{
     font-size:16px;
     font-family: 'Consolas';
+    background-color: rgb(84, 3, 3);
+    color: white;  
   }
   </style>
 </head>
@@ -17,17 +19,11 @@
     <button type="reset" value="reset">Reset</button>
   </form>
 
-  <script src="transitionTable.js"></script>
-  <script>
-  function build(){
-    var input = document.getElementById('input').value;
-
-    window.LexicalAnalyzer.run(input);
-    window.LexicalAnalyzer.buildResults();
-  }
-
-
-  </script>
+  <script src="src/domain.js"></script>
+  <script src="src/tables.js"></script>
+  <script src="src/logger.js"></script>
+  <script src="src/lexicalAnalyser.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>
