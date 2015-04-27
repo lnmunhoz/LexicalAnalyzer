@@ -22,25 +22,25 @@ var LexicalAnalyzer = {
 
         switch(char){
           case ' ':
-          var token = this.getToken(this.state);
+            var token = this.getToken(this.state);
 
-          if (token) {
-            this.createTokenResult(line, token, currentState);
+            if (token) {
+              this.createTokenResult(line, token, currentState);
 
-          } else {
-            var word = input[line].slice(this.position, i);
-            this.createErrorResult(line, word);
-          }
+            } else {
+              var word = input[line].slice(this.position, i);
+              this.createErrorResult(line, word);
+            }
 
-          // Atualiza a posição atual da linha
-          this.position = i + 1;
-          this.resetState();
-          break;
+            // Atualiza a posição atual da linha
+            this.position = i + 1;
+            this.resetState();
+            break;
 
           default:
-          var nextState = this.getNextState(char, currentState);
-          this.transitionTo(nextState);
-          break;
+            var nextState = this.getNextState(char, currentState);
+            this.transitionTo(nextState);
+            break;
         }
       }
     }
