@@ -3,32 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Analisador Lexico</title>
-  <style>
-  textarea{
-    font-size:16px;
-    font-family: 'Consolas';
-    background-color: rgb(84, 3, 3);
-    color: white;
-  }
-
-  button {
-    font-size: 16px;
-    font-family: 'Consolas';
-  }
-  </style>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app/app.css">
 </head>
 <body>
-  <form action="#">
-    <textarea name="input" id="input" cols="30" rows="10"></textarea>
-    <button type="button" onclick="build()">Build</button>
-    <button type="reset" value="reset">Reset</button>
-  </form>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1>Tabela de Simbolos</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Codigo</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-6">
+        <form class="form" action="#">
+          <h1>Console</h1>
+          <textarea class="form-control console" name="input" id="input" cols="30" rows="10"></textarea>
+          <button class="btn btn-success" type="button" onclick="build()">Build</button>
+          <button class="btn btn-default" type="reset" value="reset">Reset</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="src/domain.js"></script>
   <script src="src/tables.js"></script>
   <script src="src/logger.js"></script>
   <script src="src/lexicalAnalyser.js"></script>
-  <script src="index.js"></script>
+  <script src="app/app.js"></script>
 </body>
-
 </html>

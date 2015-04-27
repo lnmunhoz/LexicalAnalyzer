@@ -1,0 +1,21 @@
+{
+  "name": "LexicalAnalyzer",
+  "main": "app/app.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lnmunhoz/LexicalAnalyzer",
+  "authors": [
+    "lnmunhoz <ln.munhoz@gmail.com>"
+  ],
+  "description": "This is a noob lexical analyzer for a school project.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
